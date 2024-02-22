@@ -1,13 +1,11 @@
+import { Category } from "@/app/lib/definitions";
 import { DeleteCategory, UpdateCategory } from "./buttons";
-const getCategories = async () => {
-    
-    const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/categories', { next: { revalidate: 0 } })
-    const json = await res.json()
-    return json
-}
-export default async function TableCategories() {
-    
-    const categories = await getCategories()
+
+export default async function TableCategories(
+    {categories}:{
+        categories:Category[]
+    }
+) {
     return (
         <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -28,7 +26,7 @@ export default async function TableCategories() {
                     </tr>
                 </thead>
                 <tbody>
-                    {categories?.categories?.map((cat:any, i: number ) => (
+                    {categories?.map((cat:any, i: number ) => (
                         <tr key={cat.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {i+1}

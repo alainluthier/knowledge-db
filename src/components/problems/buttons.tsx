@@ -1,4 +1,5 @@
 //import { deleteProblem } from '@/app/lib/actions';
+import { deleteProblem } from '@/app/lib/actions';
 import { EyeIcon,PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -37,9 +38,9 @@ export function UpdateProblem({ id }: { id: string }) {
 }
 
 export function DeleteProblem({ id }: { id: string }) {
-  //const deleteProblemWithId = deleteProblem.bind(null, id);
+  const deleteProblemWithId = deleteProblem.bind(null, id);
   return (
-    <form //action={deleteProblemWithId}
+    <form action={deleteProblemWithId}
     >
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>

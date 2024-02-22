@@ -1,4 +1,5 @@
 //import { deleteCategory } from '@/app/lib/actions';
+import { deleteCategory } from '@/app/lib/actions';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -26,9 +27,9 @@ export function UpdateCategory({ id }: { id: string }) {
 }
 
 export function DeleteCategory({ id }: { id: string }) {
-  //const deleteCategoryWithId = deleteCategory.bind(null, id);
+  const deleteCategoryWithId = deleteCategory.bind(null, id);
   return (
-    <form //action={deleteCategoryWithId}
+    <form action={deleteCategoryWithId}
     >
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>

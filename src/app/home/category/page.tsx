@@ -1,7 +1,9 @@
 import { CreateCategory } from "@/components/categories/buttons"
 import TableCategories from "@/components/categories/table-categories"
+import { fetchCategories } from "@/app/lib/data";
 
-export default function Page() {
+export default async function Page() {
+    const categories = await fetchCategories();
     return (
         <div>
             <div className="flex w-full items-center justify-between">
@@ -11,7 +13,7 @@ export default function Page() {
                 <CreateCategory/>
             </div>
             
-            <TableCategories />
+            <TableCategories categories={categories} />
         </div>
     )
 }

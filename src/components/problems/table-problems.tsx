@@ -1,11 +1,13 @@
 import { DeleteProblem, UpdateProblem, ViewProblem } from "./buttons";
-const getProblems = async () =>{
-    const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/problems', { next: { revalidate: 0 } })
-    const json = await res.json()
-    return json
-}
-export default async function TableProblems(){
-    const problems = await getProblems()
+import { fetchFilteredProblems} from "@/app/lib/data";
+export default async function TableProblems(
+    {query,currentPage}:{
+        query: string;
+  currentPage: number;
+    }
+){
+    
+    const problems = await fetchFilteredProblems(query,currentPage);
     return(
 <div className="relative overflow-x-auto">
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -29,19 +31,19 @@ export default async function TableProblems(){
             </tr>
         </thead>
         <tbody>
-            {problems.problems?.map((pro:any)=>(
+            {problems?.map((pro:any,i:number)=>(
                 <tr key={pro.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {pro.id}
+                    {i+1}
                 </th>
                 <td className="px-6 py-4">
                     {pro.problem}
                 </td>
-                <td className="px-6 py-4">
+                <td className="line-clamp-1">
                     {pro.solution}
                 </td>
                 <td className="px-6 py-4">
-                    {pro.category.category}
+                    {pro.category}
                 </td>
                 <td className="flex justify-end gap-2 px-6 py-4">
                     <ViewProblem id={pro.id.toString()}/>
