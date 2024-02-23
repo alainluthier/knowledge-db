@@ -1,3 +1,4 @@
+import { signOut } from "@/auth";
 import { CircleStackIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
 
@@ -11,7 +12,12 @@ export default function Navbar() {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Knowledge DB</span>
         </a>
         <div className="flex md:order-2">
-          <form>
+          <form
+           action={async () => {
+            'use server';
+            await signOut();
+          }}
+          >
             <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3 disabled:bg-slate-50 disabled:text-slate-500">
               Sign Out
             </button>
